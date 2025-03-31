@@ -1,91 +1,926 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tokyo Traditional Gardens</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f9f9f9; color: #333; margin: 0; padding: 0; }
-    .garden-item { padding: 2rem; border-bottom: 1px solid #ccc; background: #fff; }
-    .garden-name { font-size: 2rem; color: #e86a33; margin-bottom: 0.5rem; }
-    .garden-description { margin-bottom: 1rem; }
-    .garden-facts { font-size: 0.9rem; color: #555; margin-bottom: 1rem; }
-    .seasons span { margin-right: 10px; padding: 4px 10px; border-radius: 20px; background: #eee; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo's Traditional Gardens - Visual Showcase</title>
+    <style>
+        :root {
+            --primary: #0f1c24;
+            --secondary: #1f3541;
+            --accent: #e86a33;
+            --light: #f8f8f8;
+            --text: #333;
+            --text-light: #f8f8f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .fullscreen-hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-slider {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .slide1 {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1920/1080');
+        }
+        
+        .slide2 {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1920/1080');
+        }
+        
+        .slide3 {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1920/1080');
+        }
+        
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 90%;
+            max-width: 1000px;
+            z-index: 10;
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .scroll-down svg {
+            animation: bounce 2s infinite;
+            margin-top: 8px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+        
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, padding 0.3s ease;
+        }
+        
+        .nav-bar.scrolled {
+            background-color: var(--primary);
+            padding: 0.8rem 3rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .gardens-showcase {
+            background-color: var(--primary);
+            color: var(--text-light);
+        }
+        
+        .garden-item {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .garden-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .garden-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+            z-index: 1;
+        }
+        
+        .garden-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin-left: 10%;
+        }
+        
+        .garden-name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .garden-name span {
+            color: var(--accent);
+        }
+        
+        .garden-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .garden-facts {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .fact {
+            display: flex;
+            align-items: center;
+        }
+        
+        .fact-icon {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .seasons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .season-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .spring {
+            background-color: #ffcad4;
+            color: #d81159;
+        }
+        
+        .summer {
+            background-color: #8ecae6;
+            color: #023047;
+        }
+        
+        .autumn {
+            background-color: #ffb703;
+            color: #7b5200;
+        }
+        
+        .winter {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        
+        .garden-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .garden-button:hover {
+            background-color: #d15a27;
+            transform: translateY(-3px);
+        }
+        
+        .garden-item:nth-child(even) .garden-overlay {
+            background: linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+        }
+        
+        .garden-item:nth-child(even) .garden-content {
+            margin-left: auto;
+            margin-right: 10%;
+            text-align: right;
+        }
+        
+        .garden-item:nth-child(even) .garden-facts,
+        .garden-item:nth-child(even) .seasons {
+            justify-content: flex-end;
+        }
+        
+        .garden-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        
+        .garden-nav-item {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .garden-nav-item.active {
+            background-color: var(--accent);
+            transform: scale(1.5);
+        }
+        
+        .seasonal-guide {
+            background-color: var(--light);
+        }
+        
+        .seasonal-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tab-button {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+        }
+        
+        .tab-button.active::after {
+            width: 60%;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .season-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+        }
+        
+        .gallery-caption h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .practical-info {
+            background-color: var(--secondary);
+            color: var(--text-light);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .info-card {
+            background-color: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .info-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .info-content {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 3rem 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        @media (max-width: 1200px) {
+            .garden-name {
+                font-size: 2.5rem;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .season-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .garden-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-bar {
+                padding: 1rem;
+            }
+            
+            .nav-bar.scrolled {
+                padding: 0.8rem 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .garden-item {
+                height: auto;
+                padding: 5rem 0;
+            }
+            
+            .garden-content {
+                margin: 0 auto;
+                text-align: center;
+                padding: 0 1.5rem;
+            }
+            
+            .garden-item:nth-child(even) .garden-content {
+                margin: 0 auto;
+                text-align: center;
+            }
+            
+            .garden-facts, 
+            .garden-item:nth-child(even) .garden-facts,
+            .seasons,
+            .garden-item:nth-child(even) .seasons {
+                justify-content: center;
+            }
+            
+            .garden-overlay {
+                background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+            }
+            
+            .garden-item:nth-child(even) .garden-overlay {
+                background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+            }
+            
+            .season-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1 style="text-align:center; padding: 2rem; background:#0f1c24; color:white;">Tokyo's Traditional Gardens</h1>
-  
-<div class="garden-item">
-  <h2 class="garden-name">Garden 1</h2>
-  <p class="garden-description">Description for Garden 1. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 7 ha | Established: 1610 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <a href="#" class="logo">
+            <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            TOKYO GARDENS
+        </a>
+        <div class="nav-links">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#gardens" class="nav-link">Gardens</a>
+            <a href="#seasons" class="nav-link">Seasons</a>
+            <a href="#info" class="nav-link">Visitor Info</a>
+        </div>
+    </nav>
+
+    <!-- Fullscreen Hero -->
+    <section class="fullscreen-hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide slide1 active"></div>
+            <div class="hero-slide slide2"></div>
+            <div class="hero-slide slide3"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Tokyo's Traditional Gardens</h1>
+            <p class="hero-subtitle">Discover ancient landscapes of tranquility in the heart of modern Tokyo</p>
+        </div>
+        <div class="scroll-down">
+            <span>Explore</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 13l5 5 5-5"></path>
+                <path d="M7 6l5 5 5-5"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Garden Showcase Section -->
+    <section class="gardens-showcase" id="gardens">
+        <!-- Garden Navigation Dots -->
+        <div class="garden-nav">
+            <div class="garden-nav-item active" data-garden="garden1"></div>
+            <div class="garden-nav-item" data-garden="garden2"></div>
+            <div class="garden-nav-item" data-garden="garden3"></div>
+            <div class="garden-nav-item" data-garden="garden4"></div>
+            <div class="garden-nav-item" data-garden="garden5"></div>
+            <div class="garden-nav-item" data-garden="garden6"></div>
+        </div>
+
+        <!-- Garden 1: Hamarikyu -->
+        <div class="garden-item" id="garden1">
+            <div class="garden-image" style="background-image: url('/api/placeholder/1920/1080');"></div>
+            <div class="garden-overlay"></div>
+            <div class="garden-content">
+                <h2 class="garden-name">Hama<span>rikyu</span> Gardens</h2>
+                <p class="garden-description">A former feudal lord's garden with seawater ponds that change level with the tides of Tokyo Bay. Surrounded by modern skyscrapers, this garden offers a striking contrast between traditional landscapes and contemporary architecture.</p>
+                <div class="garden-facts">
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <span>25 hectares</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </span>
+                        <span>Established 1654</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"></path>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </span>
+                        <span>9:00-17:00</span>
+                    </div>
+                </div>
+                <div class="seasons">
+                    <span class="season-tag spring">Spring</span>
+                    <span class="season-tag autumn">Autumn</span>
+                </div>
+                <a href="#" class="garden-button">Explore More</a>
+            </div>
+        </div>
+
+        <!-- Garden 2: Koishikawa Korakuen -->
+        <div class="garden-item" id="garden2">
+            <div class="garden-image" style="background-image: url('/api/placeholder/1920/1080');"></div>
+            <div class="garden-overlay"></div>
+            <div class="garden-content">
+                <h2 class="garden-name">Koishikawa <span>Korakuen</span></h2>
+                <p class="garden-description">One of Tokyo's oldest gardens, featuring landscapes inspired by famous scenes in China and Japan. This garden's clever design creates an impression of spaciousness within its compact grounds. The name "Korakuen" means "garden of pleasure after," reflecting Confucian ideals.</p>
+                <div class="garden-facts">
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <span>7 hectares</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </span>
+                        <span>Established 1629</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"></path>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </span>
+                        <span>9:00-17:00</span>
+                    </div>
+                </div>
+                <div class="seasons">
+                    <span class="season-tag spring">Spring</span>
+                    <span class="season-tag autumn">Autumn</span>
+                    <span class="season-tag winter">Winter</span>
+                </div>
+                <a href="#" class="garden-button">Explore More</a>
+            </div>
+        </div>
+
+        <!-- Garden 3: Rikugien -->
+        <div class="garden-item" id="garden3">
+            <div class="garden-image" style="background-image: url('/api/placeholder/1920/1080');"></div>
+            <div class="garden-overlay"></div>
+            <div class="garden-content">
+                <h2 class="garden-name"><span>Riku</span>gien Garden</h2>
+                <p class="garden-description">A strolling garden with landscapes representing scenes from famous poems, considered a masterpiece of Japanese gardens. Its name means "Six Arts Garden," referring to the six arts of Confucianism. The garden features an artificial hill and a large central pond.</p>
+                <div class="garden-facts">
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <span>8.8 hectares</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </span>
+                        <span>Established 1695</span>
+                    </div>
+                    <div class="fact">
+                        <span class="fact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"></path>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </span>
+                        <span>9:00-17:00</span>
+                    </div>
+                </div>
+                <div class="seasons">
+                    <span class="season-tag spring">Spring</span>
+                    <span class="season-tag autumn">Autumn</span>
+                </div>
+                <a href="#" class="garden-button">Explore More</a>
+            </div>
+        </div>
+
+<!-- Garden 4: Kyu-Shiba-rikyu -->
+<div class="garden-item" id="garden4">
+  <div class="garden-image" style="background-image: url('/api/placeholder/1920/1080');"></div>
+  <div class="garden-overlay"></div>
+  <div class="garden-content">
+    <h2 class="garden-name">Kyu-Shiba<span>rikyu</span> Gardens</h2>
+    <p class="garden-description">One of Tokyo's oldest gardens, Kyu-Shiba-rikyu is a stunning example of a stroll garden centered around a pond, featuring stone arrangements, small hills, and bridges. It offers a peaceful escape within the busy cityscape.</p>
+    <div class="garden-facts">
+      <div class="fact">
+        <span class="fact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </span>
+        <span>4.2 hectares</span>
+      </div>
+      <div class="fact">
+        <span class="fact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </span>
+        <span>Established 1678</span>
+      </div>
+      <div class="fact">
+        <span class="fact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"></path>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+        </span>
+        <span>9:00-17:00</span>
+      </div>
+    </div>
+    <div class="seasons">
+      <span class="season-tag spring">Spring</span>
+      <span class="season-tag summer">Summer</span>
+    </div>
+    <a href="#" class="garden-button">Explore More</a>
+  </div>
 </div>
 
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 2</h2>
-  <p class="garden-description">Description for Garden 2. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 9 ha | Established: 1620 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
+<!-- Garden 5: Kyu-Furukawa -->
+<div class="garden-item" id="garden5">
+  <div class="garden-image" style="background-image: url('/api/placeholder/1920/1080');"></div>
+  <div class="garden-overlay"></div>
+  <div class="garden-content">
+    <h2 class="garden-name">Kyu-Furukawa <span>Gardens</span></h2>
+    <p class="garden-description">A unique combination of Western-style residence, rose garden, and traditional Japanese garden. The contrast between architectural styles and seasonal blooms is a highlight of this site.</p>
+    <div class="garden-facts">
+      <div class="fact"><span class="fact-icon">📍</span><span>3 hectares</span></div>
+      <div class="fact"><span class="fact-icon">📅</span><span>Established 1917</span></div>
+      <div class="fact"><span class="fact-icon">⏰</span><span>9:00-17:00</span></div>
+    </div>
+    <div class="seasons">
+      <span class="season-tag spring">Spring</span>
+      <span class="season-tag autumn">Autumn</span>
+    </div>
+    <a href="#" class="garden-button">Explore More</a>
+  </div>
 </div>
 
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 3</h2>
-  <p class="garden-description">Description for Garden 3. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 11 ha | Established: 1630 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
+<!-- Garden 6: Kyu-Iwasaki-tei -->
+<div class="garden-item" id="garden6">
+  <div class="garden-image" style="background-image: url('/api/placeholder/1920/1080');"></div>
+  <div class="garden-overlay"></div>
+  <div class="garden-content">
+    <h2 class="garden-name">Kyu-Iwasaki-tei <span>Gardens</span></h2>
+    <p class="garden-description">This historical site showcases the former Iwasaki family residence, including Western and Japanese architectural styles and one of the few remaining billiard rooms from the Meiji era.</p>
+    <div class="garden-facts">
+      <div class="fact"><span class="fact-icon">📍</span><span>2 hectares</span></div>
+      <div class="fact"><span class="fact-icon">📅</span><span>Established 1896</span></div>
+      <div class="fact"><span class="fact-icon">⏰</span><span>9:00-17:00</span></div>
+    </div>
+    <div class="seasons">
+      <span class="season-tag spring">Spring</span>
+      <span class="season-tag summer">Summer</span>
+      <span class="season-tag autumn">Autumn</span>
+    </div>
+    <a href="#" class="garden-button">Explore More</a>
+  </div>
 </div>
-
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 4</h2>
-  <p class="garden-description">Description for Garden 4. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 13 ha | Established: 1640 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
-</div>
-
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 5</h2>
-  <p class="garden-description">Description for Garden 5. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 15 ha | Established: 1650 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
-</div>
-
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 6</h2>
-  <p class="garden-description">Description for Garden 6. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 17 ha | Established: 1660 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
-</div>
-
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 7</h2>
-  <p class="garden-description">Description for Garden 7. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 19 ha | Established: 1670 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
-</div>
-
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 8</h2>
-  <p class="garden-description">Description for Garden 8. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 21 ha | Established: 1680 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
-</div>
-
-
-<div class="garden-item">
-  <h2 class="garden-name">Garden 9</h2>
-  <p class="garden-description">Description for Garden 9. This represents a peaceful Japanese-style landscape garden.</p>
-  <div class="garden-facts">Size: 23 ha | Established: 1690 | Hours: 9:00–17:00</div>
-  <div class="seasons"><span>Spring</span><span>Autumn</span></div>
-</div>
-
-</body>
-</html>
