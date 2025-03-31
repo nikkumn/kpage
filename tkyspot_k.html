@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京のおすすめスポット</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #0f1c24;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0f1c24;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .section-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #e86a33;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="spot-showcase" id="spots">
+            <div class="section-title">
+                <h2>東京のおすすめスポット</h2>
+                <p>東京には魅力的なスポットがたくさんあります。その中でも特におすすめのスポットをご紹介します。</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ランク</th>
+                        <th>スポット名</th>
+                        <th>雰囲気・特徴</th>
+                        <th>歴史</th>
+                        <th>エリアの大きさ（平方メートル）</th>
+                        <th>徒歩での平均散策時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>下北沢（しもきたざわ）</td>
+                        <td>ヴィンテージショップやカフェ、ライブハウスが立ち並ぶ、若者文化とサブカルチャーの中心地。リラックスした雰囲気で、散策やショッピングを楽しめます。</td>
+                        <td>戦後、演劇や音楽のサブカルチャーが根付いた地域として発展。近年も独立系店舗が多く集まるエリアとして人気。</td>
+                        <td>約500,000</td>
+                        <td>約2〜3時間</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>谷中銀座商店街</td>
+                        <td>昭和の雰囲気を色濃く残す商店街で、食べ歩きや雑貨店巡りが楽しめます。猫が多く見られることでも有名で、下町情緒を感じられるスポットです。</td>
+                        <td>戦後の復興と共に発展し、現在も地域密着型の商店街として親しまれています。</td>
+                        <td>約20,000</td>
+                        <td>約1〜2時間</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>高円寺（こうえんじ）</td>
+                        <td>古着屋やライブハウスが多く、独特のサブカルチャーが息づく街。個性的なカフェやバーも点在し、自由な雰囲気が魅力です。</td>
+                        <td>戦後、学生やアーティストが集まり、サブカルチャーの発信地として発展。</td>
+                        <td>約400,000</td>
+                        <td>約2〜3時間</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>神楽坂（かぐらざか）</td>
+                        <td>石畳の路地や伝統的な料亭が残る、和の情緒あふれるエリア。フレンチレストランやカフェも多く、和洋折衷の魅力があります。</td>
+                        <td>江戸時代から花街として栄え、現在もその歴史的景観を維持。</td>
+                        <td>約300,000</td>
+                        <td>約2時間</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>吉祥寺（きちじょうじ）</td>
+                        <td>井の頭公園を中心に、ショッピングエリアやカフェが広がる人気の街。公園でのんびり過ごしたり、商店街で買い物を楽しめます。</td>
+                        <td>昭和初期から商業地として発展し、公園と共に市民の憩いの場として親しまれています。</td>
+                        <td>約1,000,000</td>
+                        <td>約3〜4時間</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>学芸大学（がくげいだいがく）</td>
+                        <td>落ち着いた雰囲気の住宅街に、おしゃれなカフェやショップが点在するエリア。観光客が少なく、ゆったりと過ごせます。</td>
+                        <td>近年、若者や日本通の間で注目されるようになったエリア。</td>
+                        <td>約350,000</td>
+                        <td>約1〜2時間</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>戸越銀座商店街</td>
+                        <td>全長約1.3kmの東京最長の商店街。多彩なグルメや雑貨店が並び、食べ歩きを楽しむことができます。</td>
+                        <td>昭和初期から続く商店街で、地域の活性化に貢献。</td>
+                        <td>約130,000</td>
+                        <td>約2時間</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>巣鴨地蔵通り商店街</td>
+                        <td>「おばあちゃんの原宿」として知られる、シニア向けの商店街。健康グッズや和菓子店が多く、落ち着いた雰囲気です。</td>
+                        <td>高齢者向けの商店街として発展し、現在も多くの人々で賑わう。</td>
+                        <td>約200,000</td>
+                        <td>約1〜2時間</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>蒲田（かまた）</td>
+                        <td>羽根つき餃子の名店が集まるグルメスポット。庶民的な雰囲気で、食べ歩きを楽しめます。</td>
+                        <td>戦後、工業地帯として発展し、現在はグルメの街としても知られる。</td>
+                        <td>約500,000</td>
+                        <td>約2時間</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>自由が丘（じゆうがおか）</td>
+                        <td>スイーツの街として有名で、おしゃれなカフェやパティスリーが立ち並ぶエリア。洗練された雰囲気で、ショッピングも楽しめます。</td>
+                        <td>昭和初期から高級住宅街として発展し、現在もそのイメージを維持。</td>
+                        <td>約600,000</td>
+                        <td>約2〜3時間</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>
