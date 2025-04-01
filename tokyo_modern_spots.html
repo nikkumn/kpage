@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Spots in Tokyo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: #f0f2f5;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1a1a2e;
+            color: #ffffff;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .spot {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .spot img {
+            width: 100%;
+            height: auto;
+        }
+        .spot-content {
+            padding: 20px;
+        }
+        .spot h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #34495e;
+        }
+        .spot p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+        .badge {
+            background-color: #0077b6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+        @media (min-width: 768px) {
+            .spot {
+                flex-direction: row;
+                align-items: stretch;
+            }
+            .spot img {
+                max-width: 300px;
+                object-fit: cover;
+            }
+            .spot-content {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Top 10 Hidden Gems in Tokyo</h1>
+    </header>
+    <div class="container">
+
+        <div class="spot">
+            <img src="shimokitazawa.jpg" alt="Shimokitazawa image">
+            <div class="spot-content">
+                <h2>1. Shimokitazawa</h2>
+                <p>A hub of youth and subculture, filled with vintage shops, cafes, and live houses. A relaxed atmosphere perfect for strolling and shopping.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 500,000㎡</span>
+                    <span class="badge">Walk: 2–3 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="yanaka_ginza.jpg" alt="Yanaka Ginza Shopping Street image">
+            <div class="spot-content">
+                <h2>2. Yanaka Ginza Shopping Street</h2>
+                <p>A retro shopping street filled with nostalgic Showa-era charm. Great for street food, local goods, and even cat sightings.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 20,000㎡</span>
+                    <span class="badge">Walk: 1–2 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="koenji.jpg" alt="Koenji image">
+            <div class="spot-content">
+                <h2>3. Koenji</h2>
+                <p>A neighborhood known for vintage stores, bars, and underground music. A laid-back area full of creativity and expression.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 400,000㎡</span>
+                    <span class="badge">Walk: 2–3 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="kagurazaka.jpg" alt="Kagurazaka image">
+            <div class="spot-content">
+                <h2>4. Kagurazaka</h2>
+                <p>Historic alleyways with traditional ryotei restaurants mixed with modern French cafes. A charming blend of East and West.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 300,000㎡</span>
+                    <span class="badge">Walk: 2 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="kichijoji.jpg" alt="Kichijoji image">
+            <div class="spot-content">
+                <h2>5. Kichijoji</h2>
+                <p>Centered around Inokashira Park, this area offers shopping, green spaces, and a lively atmosphere for all ages.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 1,000,000㎡</span>
+                    <span class="badge">Walk: 3–4 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="gakugeidai.jpg" alt="Gakugei-Daigaku image">
+            <div class="spot-content">
+                <h2>6. Gakugei-Daigaku</h2>
+                <p>A calm residential area with stylish cafes and shops. A quiet escape from the city buzz, loved by locals and expats.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 350,000㎡</span>
+                    <span class="badge">Walk: 1–2 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="togoshi_ginza.jpg" alt="Togoshi Ginza image">
+            <div class="spot-content">
+                <h2>7. Togoshi Ginza</h2>
+                <p>The longest shopping street in Tokyo (1.3km), filled with delicious street food, local goods, and friendly vibes.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 130,000㎡</span>
+                    <span class="badge">Walk: 2 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="sugamo.jpg" alt="Sugamo Jizo-dori image">
+            <div class="spot-content">
+                <h2>8. Sugamo Jizo-dori</h2>
+                <p>Known as 'Harajuku for Grandmas', this street caters to seniors with health goods, snacks, and a peaceful charm.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 200,000㎡</span>
+                    <span class="badge">Walk: 1–2 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="kamata.jpg" alt="Kamata image">
+            <div class="spot-content">
+                <h2>9. Kamata</h2>
+                <p>A gourmet destination famous for crispy gyoza. A down-to-earth area with great eats and local color.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 500,000㎡</span>
+                    <span class="badge">Walk: 2 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="spot">
+            <img src="jiyugaoka.jpg" alt="Jiyugaoka image">
+            <div class="spot-content">
+                <h2>10. Jiyugaoka</h2>
+                <p>Famous for sweets and chic cafes. A fashionable district ideal for walking, eating, and boutique shopping.</p>
+                <div class="details">
+                    <span class="badge">Area: Approx. 600,000㎡</span>
+                    <span class="badge">Walk: 2–3 hrs</span>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>
